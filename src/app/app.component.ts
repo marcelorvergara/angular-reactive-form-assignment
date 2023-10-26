@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CustomValidators } from './custom-validators';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,9 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
       this.projectForm = new FormGroup({
         'projectData': new FormGroup({
-          'projectName': new FormControl(null, Validators.required),
+          'projectName': new FormControl(null,
+            [ CustomValidators.asyncInvalidProjectName,
+            ]),
           'projectEmail': new FormControl(null, [Validators.required, Validators.email]),
           'projectSubscriptionOpts': new FormControl(['Advanced']),
           'projectPassword': new FormControl('teste123', Validators.required)
@@ -31,6 +34,6 @@ export class AppComponent implements OnInit {
 
   onSubmit() {
     this.finalProjectData = this.projectForm.value.projectData
-    console.log(this.finalProjectData)
+    console.log(this.projectForm)
   }
 }
