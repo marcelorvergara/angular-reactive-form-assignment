@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   subscriptionOptions = ['Basic', 'Advanced', 'Pro']
   finalProjectData = {
     projectName: '',
+    projectEmail: '',
     projectSubscriptionOpts: '',
     projectPassword: ''
   }
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
       this.projectForm = new FormGroup({
         'projectData': new FormGroup({
           'projectName': new FormControl(null, Validators.required),
+          'projectEmail': new FormControl(null, [Validators.required, Validators.email]),
           'projectSubscriptionOpts': new FormControl(['Advanced']),
           'projectPassword': new FormControl('teste123', Validators.required)
         })

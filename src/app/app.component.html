@@ -23,11 +23,20 @@
               class="help-block">This field is required!</span>
           </div>
           <div class="form-group">
+            <label for="projectEmail">Project E-mail:</label>
+            <input type="text" id="projectEmail" formControlName="projectEmail" class="form-control">
+            <span
+              *ngIf="!projectForm.get('projectData.projectEmail').valid && projectForm.get('projectData.projectEmail').touched"
+              class="help-block">This field is required!</span>
+          </div>
+          <div class="form-group">
+            <label for="projectSubscriptionOpts">Subscription:</label>
             <select id="projectSubscriptionOpts" formControlName="projectSubscriptionOpts" class="form-control">
               <option *ngFor="let opt of subscriptionOptions" [value]="opt" selected="Pro">{{ opt }}</option>
             </select>
           </div>
           <div class="form-group">
+            <label for="projectPassword">Password:</label>
             <input type="password" id="projectPassword" formControlName="projectPassword" class="form-control">
             <span
             *ngIf="!projectForm.get('projectData.projectPassword').valid && projectForm.get('projectData.projectPassword').touched"
@@ -41,6 +50,7 @@
       <div class="form-group">
         <div>
           <p *ngIf="finalProjectData.projectName">Name: {{ finalProjectData.projectName }}</p>
+          <p *ngIf="finalProjectData.projectEmail">Name: {{ finalProjectData.projectEmail }}</p>
           <p *ngIf="finalProjectData.projectSubscriptionOpts">Subscription: {{ finalProjectData.projectSubscriptionOpts }}</p>
           <p *ngIf="finalProjectData.projectPassword">Password: {{ finalProjectData.projectPassword }}</p>
         </div>
