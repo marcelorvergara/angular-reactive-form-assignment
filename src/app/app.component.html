@@ -1,0 +1,50 @@
+<div class="container" style="margin-top: 16px;">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <!-- Add a Form with the following Inputs (and Validators)
+           1) Mail address (should not be empty and should be an email address)
+           2) A Dropdown which allows the user to select from three different Subscriptions ("Basic", "Advanced", "Pro")
+              Set "Advanced" as Default
+           3) A Password field (should not be empty)
+           4) A Submit Button
+
+           Display a warning message if the Form is invalid AND was touched. Display a warning message below each input if it's invalid.
+
+           Upon submitting the form, you should simply print the Value of the Form to the Console.
+           Optionally, display it in your template.
+      -->
+      <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+        <div formGroupName="projectData">
+          <div class="form-group">
+            <label for="projectName">Project Name:</label>
+            <input type="text" id="projectName" formControlName="projectName" class="form-control">
+            <span
+              *ngIf="!projectForm.get('projectData.projectName').valid && projectForm.get('projectData.projectName').touched"
+              class="help-block">This field is required!</span>
+          </div>
+          <div class="form-group">
+            <select id="projectSubscriptionOpts" formControlName="projectSubscriptionOpts" class="form-control">
+              <option *ngFor="let opt of subscriptionOptions" [value]="opt" selected="Pro">{{ opt }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="password" id="projectPassword" formControlName="projectPassword" class="form-control">
+            <span
+            *ngIf="!projectForm.get('projectData.projectPassword').valid && projectForm.get('projectData.projectPassword').touched"
+            class="help-block">This field is required!</span>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </form>
+      <div class="form-group">
+        <div>
+          <p *ngIf="finalProjectData.projectName">Name: {{ finalProjectData.projectName }}</p>
+          <p *ngIf="finalProjectData.projectSubscriptionOpts">Subscription: {{ finalProjectData.projectSubscriptionOpts }}</p>
+          <p *ngIf="finalProjectData.projectPassword">Password: {{ finalProjectData.projectPassword }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
